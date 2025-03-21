@@ -11,5 +11,5 @@ public class Entrada {
         int idade = scanner.nextInt();
 
         System.err.println("Olá " + nome + ", você tem " + idade + " anos, seja bem-vindo (a)");
-    }    
+    }
 }
