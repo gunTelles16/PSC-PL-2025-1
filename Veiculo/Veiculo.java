@@ -1,10 +1,10 @@
-abstract class Veiculo {
-    private String marca;
-    private String modelo;
-    private int ano;
-    private boolean motorLigado;
-    private double velocidadeAtual;
-    private double combustivel;
+public abstract class Veiculo {
+    protected String marca;
+    protected String modelo;
+    protected int ano;
+    protected boolean motorLigado;
+    protected double velocidadeAtual;
+    protected double combustivel;
 
     public Veiculo(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual, double combustivel) {
         setMarca(marca);
@@ -12,10 +12,10 @@ abstract class Veiculo {
         setAno(ano);
         this.motorLigado = false; // Motor desligado por padrão
         this.velocidadeAtual = 0.0; // Velocidade inicial 0
-        setCombustivel(combustivel);
+        setCombustivel(combustivel); 
     }
 
-    abstract void exibirInfo();
+    abstract protected void exibirInfo();
 
     public String getMarca() {
         return this.marca;
