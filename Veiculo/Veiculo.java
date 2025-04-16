@@ -1,4 +1,4 @@
-public abstract class Veiculo {
+abstract public class Veiculo {
     protected String marca;
     protected String modelo;
     protected int ano;
@@ -23,7 +23,7 @@ public abstract class Veiculo {
 
     public void setMarca(String marca) {
         if (marca == null || marca.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome da marca não pode ser vazio!");
+            throw new IllegalArgumentException("Marca não pode ser vazio!");
         }
         this.marca = marca;
     }
@@ -34,7 +34,7 @@ public abstract class Veiculo {
 
     public void setModelo(String modelo) {
         if (modelo == null || modelo.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome do modelo não pode ser vazio!");
+            throw new IllegalArgumentException("Modelo não pode ser vazio!");
         }
         this.modelo = modelo;
     }
@@ -66,7 +66,7 @@ public abstract class Veiculo {
 
     public void setVelocidadeAtual(double velocidadeAtual) {
         if (velocidadeAtual < 0) {
-            throw new IllegalArgumentException("A velocidade atual não pode ser negativa!");
+            throw new IllegalArgumentException("Velocidade atual não pode ser negativa!");
         }
         this.velocidadeAtual = velocidadeAtual;
     }
@@ -77,7 +77,7 @@ public abstract class Veiculo {
 
     public void setCombustivel(double combustivel) {
         if (combustivel < 0) {
-            throw new IllegalArgumentException("A quantidade de combustível não pode ser negativa!");
+            throw new IllegalArgumentException("Quantidade de combustível não pode ser negativa!");
         }
         this.combustivel = combustivel;
     }

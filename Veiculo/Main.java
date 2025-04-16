@@ -3,33 +3,50 @@ import java.util.Scanner;
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        Veiculo veiculo = null;
+        Locadora locadora = null;
 
-        while (true) {
-            
-            System.out.println("=== Cadastro de Veículos ===");
-            System.out.println("Escolha o tipo de veículo:");
-            System.out.println("1 - Carro");
-            System.out.println("2 - Moto");
-            System.out.println("3 - Sair");
-            int opcao = scanner.nextInt();
+        while (locadora == null) {
+            try{
+                System.out.println("=== Cadastro de Veículos ===");
+                String placa = getString("Placa:");
+                String tipo = getString("Tipo (Carro, Moto):");
 
-            String marca = getString("Marca:");
-            String modelo = getString("Modelo:"); 
-            Number ano = getNumero("Ano de fabricação:");
-            if (ano instanceof Integer) {
-                int inteiro = (Integer) ano;
-            } else {
-                double decimal = (Double) ano;
+                Veiculo veiculo = null;
+
+                if (!tipo.equalsIgnoreCase("Carro") || !tipo.equalsIgnoreCase("Moto")) {
+                    throw new IllegalArgumentException("Tipo inválido! Digite 'Carro' ou 'Moto'.");
+                }
+
+                if (tipo.equalsIgnoreCase("Carro")) {
+                    String subtipo = getString("Tipo de carro (Sedan ou SUV):");
+
+                    if (!subtipo.equalsIgnoreCase("Sedan") || !subtipo.equalsIgnoreCase("SUV")) {
+                        throw new IllegalArgumentException("Tipo de carro inválido! Digite 'Sedan' ou 'SUV'.");
+                    }
+
+                    if (subtipo.equalsIgnoreCase("Sedan")) {
+                        veiculo = criarSedan();
+                    } else if (subtipo.equalsIgnoreCase(subtipo)) {
+                        veiculo = criarSUV();
+                    }
+                }
+
+                if (tipo.equalsIgnoreCase("Moto")) {
+                    veiculo = criarMoto();
+                }
+
+                String marca = getString("Marca:");
+                String modelo = getString("Modelo:");
+
+                int ano = (int) getNumero("Ano de fabricação:");
+
+                double combustivel = (double) getNumero("Quantidade de combustível:");
+
+                scanner.close();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                continue;
             }
-
-            Number combustivel = getNumero("Quantidade de combustível:");
-            if (combustivel instanceof Double) {
-                double inteiro = (Double) combustivel;
-            } else {
-                int decimal = (Integer) combustivel;
-            }
-            scanner.close();
         }
     }
 
@@ -37,13 +54,13 @@ public class Main {
         while (true) {
             try {
                 System.out.println(mensagem);
-                String input = scanner.nextLine().trim();
+                String input = scanner.nextLine().trim().toLowerCase();
 
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");
                 } 
                 return input;
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
             }
@@ -54,7 +71,7 @@ public class Main {
         while (true) {
             try{
                 System.out.println(mensagem);
-                String input = scanner.nextLine().trim();
+                String input = scanner.nextLine().trim().toLowerCase();
 
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");

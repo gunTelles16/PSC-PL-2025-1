@@ -9,6 +9,7 @@ public class SUV extends Carro {
             setTetoSolar(tetoSolar);
     }
 
+    @Override
     public void exibirInfo() {
         System.out.println("=== Informações do SUV ===");
         System.out.println("Marca: " + getMarca());

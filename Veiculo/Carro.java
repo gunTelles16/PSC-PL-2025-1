@@ -1,4 +1,4 @@
-public abstract class Carro extends Veiculo {
+abstract public class Carro extends Veiculo {
     protected int numeroPortas;
     protected boolean arCondicionado;
 
@@ -9,17 +9,7 @@ public abstract class Carro extends Veiculo {
             setArcondicionado(arCondicionado);
     }
 
-    public void exibirInfo() {
-        System.out.println("=== Informações do Véiculo ===");
-        System.out.println("Marca: " + getMarca());
-        System.out.println("Modelo: " + getModelo());
-        System.out.println("Ano de fabricação: " + getAno());
-        System.out.print("Motor Ligado : " + (isMotorLigado() ? "Sim" : "Não"));
-        System.out.println("Velocidade atual: " + getVelocidadeAtual() + " km/h");
-        System.out.println("Combustível: " + getCombustivel() + " litros");
-        System.out.println("Número de portas: " + getNumeroPortas());
-        System.out.println("Ar condicionado: " + (isArcondicionado() ? "Sim" : "Não"));
-    }
+    abstract protected void exibirInfo();
 
     public int getNumeroPortas() {
         return this.numeroPortas;

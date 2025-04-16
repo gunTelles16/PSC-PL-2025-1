@@ -9,6 +9,7 @@ public class Sedan extends Carro {
             setPilotoAutomatico(pilotoAutomatico);
     }
 
+    @Override // 
     public void exibirInfo() {
         System.out.println("=== Informações do Sedan ===");
         System.out.println("Marca: " + getMarca());

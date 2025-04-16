@@ -9,6 +9,7 @@ public class Moto extends Veiculo{
             setPartidaEletrica(partidaEletrica);
     }
 
+    @Override
     public void exibirInfo() {
         System.out.println("=== Informações da Moto ===");
         System.out.println("Marca: " + getMarca());
