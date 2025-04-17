@@ -42,7 +42,7 @@ abstract public class Carro extends Veiculo {
 
     @Override
     public void abastecer(double combustivel) {
-        if (this.limiteLitros >= combustivel) {
+        if (this.limiteLitros - super.statusCombustivel() >= combustivel) {
             super.abastecer(combustivel);
         }
     }
