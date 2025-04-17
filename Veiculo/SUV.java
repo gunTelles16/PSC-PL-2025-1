@@ -17,7 +17,7 @@ public class SUV extends Carro {
         System.out.println("Ano de fabricação: " + getAno());
         System.out.print("Motor Ligado: " + (isMotorLigado() ? "Sim" : "Não"));
         System.out.println("Velocidade atual: " + getVelocidadeAtual() + " km/h");
-        System.out.println("Combustível: " + getCombustivel() + " litros");
+        System.out.println("Combustível: " + statusCombustivel() + " litros");
         System.out.println("Número de portas: " + getNumeroPortas());
         System.out.println("Ar condicionado: " + (isArcondicionado() ? "Sim" : "Não"));
         System.out.println("Tração 4x4: " + (isTracao4x4() ? "Sim" : "Não"));

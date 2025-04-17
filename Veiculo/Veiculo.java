@@ -71,7 +71,7 @@ abstract public class Veiculo {
         this.velocidadeAtual = velocidadeAtual;
     }
 
-    public double getCombustivel() {
+    public double statusCombustivel() {
         return this.combustivel;
     }
 
@@ -108,7 +108,7 @@ abstract public class Veiculo {
         }
         this.velocidadeAtual += 10;
         this.combustivel --;
-        System.out.println("Acelerando... Velocidade atual: " + getVelocidadeAtual() + " km/h. Combustível restante: " + getCombustivel() + " litros.");
+        System.out.println("Acelerando... Velocidade atual: " + getVelocidadeAtual() + " km/h. Combustível restante: " + statusCombustivel() + " litros.");
     }
 
     public void frear() {

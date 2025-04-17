@@ -17,7 +17,7 @@ public class Moto extends Veiculo{
         System.out.println("Ano de fabricação: " + getAno());
         System.out.println("Motor ligado: " + (isMotorLigado() ? "Sim" : "Não"));
         System.out.println("Velocidade atual: " + getVelocidadeAtual() + " km/h");
-        System.out.println("Combustível: " + getCombustivel() + " litros");
+        System.out.println("Combustível: " + statusCombustivel() + " litros");
         System.out.println("Carenagem: " + (isTemCarenagem() ? "Sim" : "Não"));
         System.out.println("Partida elétrica: " + (isPartidaEletrica() ? "Sim" : "Não"));
     }
