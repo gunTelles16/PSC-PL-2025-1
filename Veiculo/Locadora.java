@@ -10,7 +10,51 @@ public class Locadora {
         this.veiculos = new HashMap<>();
     }
 
-    private Sedan criarSedan() {
+    public void adicionarVeiculo() {
+        System.out.println("=== Cadastro de Veículos ===");
+        String placa = getString("Placa:");
+        String tipo = getString("Tipo (Carro, Moto):");
+
+        Veiculo veiculo = null;
+
+        if (!tipo.equalsIgnoreCase("Carro") || !tipo.equalsIgnoreCase("Moto")) {
+            throw new IllegalArgumentException("Tipo inválido! Digite 'Carro' ou 'Moto'.");
+        }
+
+        if (tipo.equalsIgnoreCase("Carro")) {
+        String subtipo = getString("Tipo de carro (Sedan ou SUV):");
+
+            if (!subtipo.equalsIgnoreCase("Sedan") || !subtipo.equalsIgnoreCase("SUV")) {
+                throw new IllegalArgumentException("Tipo de carro inválido! Digite 'Sedan' ou 'SUV'.");
+            }
+
+            if (subtipo.equalsIgnoreCase("Sedan")) {
+                criarSedan();
+            } else if (subtipo.equalsIgnoreCase(subtipo)) {
+                criarSUV();
+            }
+
+            if (tipo.equalsIgnoreCase("Moto")) {
+                criarMoto();
+            }
+        }
+        
+        veiculos.put(placa, veiculo);
+        System.out.println("Veículo adicionado com sucesso!");
+    }
+
+    public Moto criarMoto() {
+        System.out.println("=== Cadastro de Moto ===");
+        String marca = getString("Marca:");
+        String modelo = getString("Modelo");
+        int ano = (int) getNumero("Ano de fabricação:");
+        double combustivel = (double) getNumero("Quantidade de combustível:");
+        boolean temCarenagem = getBoolean("Carenagem (Sim/Não):");
+        boolean partidaEletrica = getBoolean("Partida elétrica (Sim/Não):");
+        return new Moto(marca, modelo, ano, false, 0.0, combustivel, temCarenagem, partidaEletrica);
+    }
+
+    public Sedan criarSedan() {
         System.out.println("=== Cadastro de Sedan ===");
         String marca = getString("Marca:");
         String modelo = getString("Modelo:");
@@ -20,8 +64,24 @@ public class Locadora {
         boolean arCondicionado = getBoolean("Ar condicionado (true/false):");
         boolean bancoDeCouro = getBoolean("Banco de couro (true/false):");
         boolean pilotoAutomatico = getBoolean("Piloto automático (true/false):");
-        return new Sedan(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, 
-            arCondicionado, bancoDeCouro, pilotoAutomatico);
+        return new Sedan(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, arCondicionado, bancoDeCouro, pilotoAutomatico);
+    }
+
+    public SUV criarSUV() {
+        System.out.println("=== Cadastro de SUV ===");
+        String marca = getString("Marca:");
+        String modelo = getString("Modelo:");
+        int ano = (int) getNumero("Ano de fabricação:");
+        double combustivel = (double) getNumero("Quantidade de combustível");
+        int numeroPortas = (int) getNumero("Número de portas:");
+        boolean arCondicionado = getBoolean("Ar condicionado");
+        boolean tracao4x4 = getBoolean("Tração 4x4 (Sim/Não):");
+        boolean pilotoAutomatico = getBoolean("Piloto automático (Sim/Não):");
+        return new SUV(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, arCondicionado, tracao4x4, pilotoAutomatico);
+    }
+
+    public HashMap<String, Veiculo> getVeiculo() {
+        return veiculos;
     }
 
     private static String getString(String mensagem) {

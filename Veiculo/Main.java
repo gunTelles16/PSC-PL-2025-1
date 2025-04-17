@@ -3,49 +3,25 @@ import java.util.Scanner;
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        Locadora locadora = null;
+        Locadora locadora = new Locadora();
+        locadora.adicionarVeiculo();
 
-        while (locadora == null) {
-            try{
-                System.out.println("=== Cadastro de Veículos ===");
-                String placa = getString("Placa:");
-                String tipo = getString("Tipo (Carro, Moto):");
 
-                Veiculo veiculo = null;
+        String opcao = getString("Deseja dirigir o veículo?");
 
-                if (!tipo.equalsIgnoreCase("Carro") || !tipo.equalsIgnoreCase("Moto")) {
-                    throw new IllegalArgumentException("Tipo inválido! Digite 'Carro' ou 'Moto'.");
-                }
+        if (!opcao.equalsIgnoreCase("Sim") || !opcao.equalsIgnoreCase("Não")) {
+            throw new IllegalArgumentException("Opção inválida! Digite 'Sim' ou 'Não'.");
+        }
 
-                if (tipo.equalsIgnoreCase("Carro")) {
-                    String subtipo = getString("Tipo de carro (Sedan ou SUV):");
+        if (opcao.equalsIgnoreCase("Sim")) {
+            int menu = (int) getNumero("Escolha uma opção:\n 1 - LigarMotor \n2 - Exibir informações \n3 - Sair do veículo");
 
-                    if (!subtipo.equalsIgnoreCase("Sedan") || !subtipo.equalsIgnoreCase("SUV")) {
-                        throw new IllegalArgumentException("Tipo de carro inválido! Digite 'Sedan' ou 'SUV'.");
-                    }
-
-                    if (subtipo.equalsIgnoreCase("Sedan")) {
-                        veiculo = criarSedan();
-                    } else if (subtipo.equalsIgnoreCase(subtipo)) {
-                        veiculo = criarSUV();
-                    }
-                }
-
-                if (tipo.equalsIgnoreCase("Moto")) {
-                    veiculo = criarMoto();
-                }
-
-                String marca = getString("Marca:");
-                String modelo = getString("Modelo:");
-
-                int ano = (int) getNumero("Ano de fabricação:");
-
-                double combustivel = (double) getNumero("Quantidade de combustível:");
-
-                scanner.close();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                continue;
+            if (menu != 1 || menu != 2 || menu != 3) {
+                throw new IllegalArgumentException("Opção inválida! Tente novamente.");
+            }
+            
+            if (menu == 1) {
+                
             }
         }
     }
