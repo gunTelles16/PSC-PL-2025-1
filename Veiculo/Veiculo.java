@@ -122,4 +122,12 @@ abstract public class Veiculo {
         }
         System.out.println("Freando... Velocidade atual: " + getVelocidadeAtual() + " km/h.");
     }
+
+    public void abastecer(double combustivel) {
+        if (this.motorLigado) {
+            throw new IllegalStateException("O motor deve estar desligado para abastecer!");
+        }
+        this.combustivel += combustivel;
+        System.out.println(combustivel + " litros foram abastecendo no veículo!");
+    }
 }
