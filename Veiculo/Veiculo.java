@@ -130,4 +130,15 @@ abstract public class Veiculo {
         this.combustivel += combustivel;
         System.out.println(combustivel + " litros foram abastecendo no veículo!");
     }
+
+    public void sairVeiculo() {
+        if (this.motorLigado) {
+            throw new IllegalStateException("Desligue o motor antes de sair do veículo!");
+        }
+
+        if (this.velocidadeAtual > 0) {
+            throw new IllegalStateException("Reduza a velocidade a zero antes de sair do veículo!");
+        }
+        System.out.println("Saindo do veículo...");
+    }
 }

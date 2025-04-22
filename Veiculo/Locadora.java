@@ -3,44 +3,41 @@ import java.util.Scanner;
 
 public class Locadora {
     private HashMap<String, Veiculo> veiculos;
-
     private static Scanner scanner = new Scanner(System.in);
 
     public Locadora() {
         this.veiculos = new HashMap<>();
     }
 
-    public void adicionarVeiculo() {
+    public Veiculo adicionarVeiculo() {
         System.out.println("=== Cadastro de Veículos ===");
         String placa = getString("Placa:");
         String tipo = getString("Tipo (Carro, Moto):");
 
         Veiculo veiculo = null;
 
-        if (!tipo.equalsIgnoreCase("Carro") || !tipo.equalsIgnoreCase("Moto")) {
+        if (!tipo.equalsIgnoreCase("Carro") && !tipo.equalsIgnoreCase("Moto")) {
             throw new IllegalArgumentException("Tipo inválido! Digite 'Carro' ou 'Moto'.");
         }
 
         if (tipo.equalsIgnoreCase("Carro")) {
         String subtipo = getString("Tipo de carro (Sedan ou SUV):");
 
-            if (!subtipo.equalsIgnoreCase("Sedan") || !subtipo.equalsIgnoreCase("SUV")) {
+            if (!subtipo.equalsIgnoreCase("Sedan") && !subtipo.equalsIgnoreCase("SUV")) {
                 throw new IllegalArgumentException("Tipo de carro inválido! Digite 'Sedan' ou 'SUV'.");
             }
 
             if (subtipo.equalsIgnoreCase("Sedan")) {
-                criarSedan();
+                veiculo = criarSedan();
             } else if (subtipo.equalsIgnoreCase(subtipo)) {
-                criarSUV();
+                veiculo = criarSUV();
             }
-
-            if (tipo.equalsIgnoreCase("Moto")) {
-                criarMoto();
-            }
+        } else if (tipo.equalsIgnoreCase("Moto")) {
+            veiculo = criarMoto();
         }
-        
+
         veiculos.put(placa, veiculo);
-        System.out.println("Veículo adicionado com sucesso!");
+        return veiculo;
     }
 
     public Moto criarMoto() {
@@ -51,6 +48,7 @@ public class Locadora {
         double combustivel = (double) getNumero("Quantidade de combustível:");
         boolean temCarenagem = getBoolean("Carenagem (Sim/Não):");
         boolean partidaEletrica = getBoolean("Partida elétrica (Sim/Não):");
+        
         return new Moto(marca, modelo, ano, false, 0.0, combustivel, temCarenagem, partidaEletrica);
     }
 
@@ -64,6 +62,7 @@ public class Locadora {
         boolean arCondicionado = getBoolean("Ar condicionado (true/false):");
         boolean bancoDeCouro = getBoolean("Banco de couro (true/false):");
         boolean pilotoAutomatico = getBoolean("Piloto automático (true/false):");
+        
         return new Sedan(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, arCondicionado, bancoDeCouro, pilotoAutomatico);
     }
 
@@ -77,10 +76,11 @@ public class Locadora {
         boolean arCondicionado = getBoolean("Ar condicionado");
         boolean tracao4x4 = getBoolean("Tração 4x4 (Sim/Não):");
         boolean pilotoAutomatico = getBoolean("Piloto automático (Sim/Não):");
+        
         return new SUV(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, arCondicionado, tracao4x4, pilotoAutomatico);
     }
 
-    public HashMap<String, Veiculo> getVeiculo() {
+    public HashMap<String, Veiculo> getVeiculos() {
         return veiculos;
     }
 
@@ -93,6 +93,7 @@ public class Locadora {
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");
                 }
+                
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -118,11 +119,11 @@ public class Locadora {
                         return numero;
                     }
                 }
+
             } catch (NumberFormatException e) {
                 System.out.println("Valor inválido! Tente novamente.");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                continue;
             }
         }
     }
@@ -137,16 +138,15 @@ public class Locadora {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");
                 }
 
-                if (input.equalsIgnoreCase("Sim")) {
+                if (input.equals("Sim")) {
                     return true;
-                } else if (input.equalsIgnoreCase("Não")) {
+                } else if (input.equals("Não")) {
                     return false;
                 } else {
                     throw new IllegalArgumentException("Por favor, digite 'Sim' ou 'Não'!");
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                continue;
             }
         }
     }
