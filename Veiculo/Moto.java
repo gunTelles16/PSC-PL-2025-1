@@ -2,11 +2,11 @@ public class Moto extends Veiculo{
     private boolean temCarenagem;
     private boolean partidaEletrica;
 
-    public Moto(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual,
-        double combustivel, boolean temCarenagem, boolean partidaEletrica) {
-            super(marca, modelo, ano, false, 0.0, combustivel);
-            setTemCarenagem(temCarenagem);
-            setPartidaEletrica(partidaEletrica);
+    public Moto(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual,double combustivel,
+            double limiteLitros, boolean temCarenagem, boolean partidaEletrica) {
+        super(marca, modelo, ano, false, 0.0, combustivel, limiteLitros);
+        setTemCarenagem(temCarenagem);
+        setPartidaEletrica(partidaEletrica);
     }
 
     @Override
@@ -17,7 +17,8 @@ public class Moto extends Veiculo{
         System.out.println("Ano de fabricação: " + getAno());
         System.out.println("Motor ligado: " + (isMotorLigado() ? "Sim" : "Não"));
         System.out.println("Velocidade atual: " + getVelocidadeAtual() + " km/h");
-        System.out.println("Combustível: " + statusCombustivel() + " litros");
+        System.out.println("Combustível: " + getCombustivel() + " litros");
+        System.out.println("Limite do tanque de combustível: " + getLimiteLitros() + " litros");
         System.out.println("Carenagem: " + (isTemCarenagem() ? "Sim" : "Não"));
         System.out.println("Partida elétrica: " + (isPartidaEletrica() ? "Sim" : "Não"));
     }

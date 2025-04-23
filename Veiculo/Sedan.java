@@ -3,13 +3,13 @@ public class Sedan extends Carro {
     private boolean pilotoAutomatico;
     
     public Sedan(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual, double combustivel,
-        int numeroPortas, boolean arCondicionado, boolean bancoDeCouro, boolean pilotoAutomatico) {
-            super(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, arCondicionado);
-            setBancoDeCouro(bancoDeCouro);
-            setPilotoAutomatico(pilotoAutomatico);
+            double limiteLitros, int numeroPortas, boolean arCondicionado, boolean bancoDeCouro, boolean pilotoAutomatico) {
+        super(marca, modelo, ano, false, 0.0, combustivel, limiteLitros, numeroPortas, arCondicionado);
+        setBancoDeCouro(bancoDeCouro);
+        setPilotoAutomatico(pilotoAutomatico);
     }
 
-    @Override // 
+    @Override // Sobrescrevendo o método exibirInfo da classe Carro
     public void exibirInfo() {
         System.out.println("=== Informações do Sedan ===");
         System.out.println("Marca: " + getMarca());
@@ -17,7 +17,8 @@ public class Sedan extends Carro {
         System.out.println("Ano de fabricação: " + getAno());
         System.out.println("Motor ligado: " + (isMotorLigado() ? "Sim" : "Não"));
         System.out.println("Velocidade atual: " + getVelocidadeAtual() + " km/h");
-        System.out.println("Combustível: " + statusCombustivel() + " litros");
+        System.out.println("Combustível: " + getCombustivel() + " litros");
+        System.out.println("Limite do tanque de combustível: " + getLimiteLitros() + " litros");
         System.out.println("Número de portas: " + getNumeroPortas());
         System.out.println("Ar condicionado: " + (isArcondicionado() ? "Sim" : "Não"));
         System.out.println("Banco de couro: " + (isBancoDeCouro() ? "Sim" : "Não"));

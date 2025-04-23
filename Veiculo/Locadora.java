@@ -21,7 +21,7 @@ public class Locadora {
         }
 
         if (tipo.equalsIgnoreCase("Carro")) {
-        String subtipo = getString("Tipo de carro (Sedan ou SUV):");
+            String subtipo = getString("Tipo de carro (Sedan ou SUV):");
 
             if (!subtipo.equalsIgnoreCase("Sedan") && !subtipo.equalsIgnoreCase("SUV")) {
                 throw new IllegalArgumentException("Tipo de carro inválido! Digite 'Sedan' ou 'SUV'.");
@@ -46,10 +46,12 @@ public class Locadora {
         String modelo = getString("Modelo");
         int ano = (int) getNumero("Ano de fabricação:");
         double combustivel = (double) getNumero("Quantidade de combustível:");
+        double limiteLitros = (double) getNumero("Limite do tanque de combustível:");
         boolean temCarenagem = getBoolean("Carenagem (Sim/Não):");
         boolean partidaEletrica = getBoolean("Partida elétrica (Sim/Não):");
         
-        return new Moto(marca, modelo, ano, false, 0.0, combustivel, temCarenagem, partidaEletrica);
+        return new Moto(marca, modelo, ano, false, 0.0, combustivel, limiteLitros, 
+            temCarenagem, partidaEletrica);
     }
 
     public Sedan criarSedan() {
@@ -58,12 +60,14 @@ public class Locadora {
         String modelo = getString("Modelo:");
         int ano = (int) getNumero("Ano de fabricação:");
         double combustivel = (double) getNumero("Quantidade de combustível:");
+        double limiteLitros = (double) getNumero("Limite do tanque de combustível:");
         int numeroPortas = (int) getNumero("Número de portas:");
         boolean arCondicionado = getBoolean("Ar condicionado (true/false):");
         boolean bancoDeCouro = getBoolean("Banco de couro (true/false):");
         boolean pilotoAutomatico = getBoolean("Piloto automático (true/false):");
         
-        return new Sedan(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, arCondicionado, bancoDeCouro, pilotoAutomatico);
+        return new Sedan(marca, modelo, ano, false, 0.0, combustivel, limiteLitros,
+            numeroPortas, arCondicionado, bancoDeCouro, pilotoAutomatico);
     }
 
     public SUV criarSUV() {
@@ -72,12 +76,14 @@ public class Locadora {
         String modelo = getString("Modelo:");
         int ano = (int) getNumero("Ano de fabricação:");
         double combustivel = (double) getNumero("Quantidade de combustível");
+        double limiteLitros = (double) getNumero("Limite do tanque de combustível:");
         int numeroPortas = (int) getNumero("Número de portas:");
         boolean arCondicionado = getBoolean("Ar condicionado");
         boolean tracao4x4 = getBoolean("Tração 4x4 (Sim/Não):");
         boolean pilotoAutomatico = getBoolean("Piloto automático (Sim/Não):");
         
-        return new SUV(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, arCondicionado, tracao4x4, pilotoAutomatico);
+        return new SUV(marca, modelo, ano, false, 0.0, combustivel, limiteLitros,
+            numeroPortas, arCondicionado, tracao4x4, pilotoAutomatico);
     }
 
     public HashMap<String, Veiculo> getVeiculos() {
@@ -88,16 +94,14 @@ public class Locadora {
         while (true) {
             try{
                 System.out.println(mensagem);
-                String input = scanner.nextLine().trim().toLowerCase();
+                String input = scanner.nextLine().trim();
 
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");
                 }
-                
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                continue;
             }
         }
     }
@@ -106,18 +110,17 @@ public class Locadora {
         while (true) {
             try {
                 System.out.println(mensagem);
-                String input = scanner.nextLine().trim().toLowerCase();
+                String input = scanner.nextLine().trim();
 
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");
-                } else {
-                    double numero = Double.parseDouble(input);
+                } 
+                double numero = Double.parseDouble(input);
 
-                    if (numero == (int) numero) {
-                        return (int) numero;
-                    } else {
-                        return numero;
-                    }
+                if (numero == (int) numero) {
+                    return (int) numero;
+                } else {
+                    return numero;
                 }
 
             } catch (NumberFormatException e) {
@@ -132,7 +135,7 @@ public class Locadora {
         while (true) {
             try {
                 System.out.println(mensagem);
-                String input = scanner.nextLine().trim().toLowerCase();
+                String input = scanner.nextLine().trim();
 
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");
@@ -145,6 +148,7 @@ public class Locadora {
                 } else {
                     throw new IllegalArgumentException("Por favor, digite 'Sim' ou 'Não'!");
                 }
+                
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

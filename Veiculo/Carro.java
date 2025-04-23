@@ -4,11 +4,11 @@ abstract public class Carro extends Veiculo {
     protected double limiteLitros;
 
     public Carro(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual, double combustivel,
-        int numeroPortas, boolean arCondicionado) {
-            super(marca, modelo, ano, false, 0.0, combustivel);
-            setNumeroPortas(numeroPortas);
-            setArcondicionado(arCondicionado);
-            setLimiteLitros(combustivel);
+            double limiteLitros, int numeroPortas, boolean arCondicionado) {
+        super(marca, modelo, ano, false, 0.0, combustivel, limiteLitros);
+        setNumeroPortas(numeroPortas);
+        setArcondicionado(arCondicionado);
+        setLimiteLitros(combustivel);
     }
 
     abstract protected void exibirInfo();
@@ -30,20 +30,5 @@ abstract public class Carro extends Veiculo {
 
     public void setArcondicionado(boolean arCondicionado) {
         this.arCondicionado = arCondicionado;
-    }
-
-    public double getLimiteLitros() {
-        return limiteLitros;
-    }
-
-    public void setLimiteLitros(double limiteLitros) {
-        this.limiteLitros = limiteLitros;
-    }
-
-    @Override
-    public void abastecer(double combustivel) {
-        if (this.limiteLitros - super.statusCombustivel() >= combustivel) {
-            super.abastecer(combustivel);
-        }
     }
 }

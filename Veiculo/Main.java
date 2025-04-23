@@ -11,8 +11,8 @@ public class Main {
 
             String opcao = getString("Deseja dirigir o veículo?");
 
-            if (!opcao.equalsIgnoreCase("Sim") || !opcao.equalsIgnoreCase("Não")) {
-            throw new IllegalArgumentException("Opção inválida! Digite 'Sim' ou 'Não'.");
+            if (!opcao.equalsIgnoreCase("Sim") && !opcao.equalsIgnoreCase("Não")) {
+                throw new IllegalArgumentException("Opção inválida! Digite 'Sim' ou 'Não'.");
             }
 
             if (opcao.equalsIgnoreCase("Sim")) {
@@ -22,12 +22,10 @@ public class Main {
                     throw new IllegalArgumentException("Opção inválida! Tente novamente.");
                 }
             
-                if (menu == 1) {
-                    veiculo.ligarMotor();
-                } else if (menu == 2) {
-                    veiculo.exibirInfo();
-                } else if (menu == 3) {
-                    veiculo.sairVeiculo();
+                switch (menu) {
+                    case 1 -> veiculo.ligarMotor();
+                    case 2 -> veiculo.exibirInfo();
+                    case 3 -> veiculo.sairVeiculo();
                 }
             }
 
@@ -38,18 +36,18 @@ public class Main {
                     throw new IllegalArgumentException("Opção inválida! Tente novamente.");
                 } 
             
-                if (menu == 1) {
-                    veiculo.acelerar();
-                } else if (menu == 2) {
-                    veiculo.frear();
-                } else if (menu == 3) {
-                    veiculo.desligarMotor();
-                    break;
-                } else if (menu == 4) {
-                    double combustivel = (double) getNumero("Quantidade de combustível a abastecer:");
-                    veiculo.abastecer(combustivel);
-                } else if (menu == 5) {
-                    veiculo.sairVeiculo();
+                switch (menu) {
+                    case 1 -> veiculo.acelerar();
+                    case 2 -> veiculo.frear();
+                    case 3 -> {
+                        veiculo.desligarMotor();
+                        break;
+                    }
+                    case 4 -> {
+                        double combustivel = (double) getNumero("Quantidade de combustível a abastecer:");
+                        veiculo.abastecer(combustivel);
+                    }
+                    case 5 -> veiculo.sairVeiculo();
                 }
             }
         
@@ -62,7 +60,7 @@ public class Main {
         while (true) {
             try {
                 System.out.println(mensagem);
-                String input = scanner.nextLine().trim().toLowerCase();
+                String input = scanner.nextLine().trim();
 
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");
@@ -70,7 +68,6 @@ public class Main {
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                continue;
             }
         }
     }
@@ -79,25 +76,23 @@ public class Main {
         while (true) {
             try{
                 System.out.println(mensagem);
-                String input = scanner.nextLine().trim().toLowerCase();
+                String input = scanner.nextLine().trim();
 
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("O campo não pode ser vazio!");
-                } else {
-                    double numero = Double.parseDouble(input);
+                } 
+                double numero = Double.parseDouble(input);
 
-                    if (numero == (int) numero) {
-                        return (int) numero;
-                    } else {
-                        return numero;
-                    }
+                if (numero == (int) numero) {
+                    return (int) numero;
+                } else {
+                    return numero;
                 }
 
             } catch (NumberFormatException e) {
                 System.out.println("Valor inválido! Tente novamente.");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                continue;
             }
         }
     }

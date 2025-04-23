@@ -3,10 +3,10 @@ public class SUV extends Carro {
     private boolean tetoSolar;
 
     public SUV(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual, double combustivel,
-        int numeroPortas, boolean arCondicionado, boolean tracao4x4, boolean tetoSolar) {
-            super(marca, modelo, ano, false, 0.0, combustivel, numeroPortas, arCondicionado);
-            setTracao4x4(tracao4x4);
-            setTetoSolar(tetoSolar);
+            double limiteLitros, int numeroPortas, boolean arCondicionado, boolean tracao4x4, boolean tetoSolar) {
+        super(marca, modelo, ano, false, 0.0, combustivel, limiteLitros, numeroPortas, arCondicionado);
+        setTracao4x4(tracao4x4);
+        setTetoSolar(tetoSolar);
     }
 
     @Override
@@ -17,7 +17,8 @@ public class SUV extends Carro {
         System.out.println("Ano de fabricação: " + getAno());
         System.out.print("Motor Ligado: " + (isMotorLigado() ? "Sim" : "Não"));
         System.out.println("Velocidade atual: " + getVelocidadeAtual() + " km/h");
-        System.out.println("Combustível: " + statusCombustivel() + " litros");
+        System.out.println("Combustível: " + getCombustivel() + " litros");
+        System.out.println("Limite do tanque de combustível: " + getLimiteLitros() + " litros");
         System.out.println("Número de portas: " + getNumeroPortas());
         System.out.println("Ar condicionado: " + (isArcondicionado() ? "Sim" : "Não"));
         System.out.println("Tração 4x4: " + (isTracao4x4() ? "Sim" : "Não"));

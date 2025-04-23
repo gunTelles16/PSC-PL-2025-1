@@ -5,14 +5,17 @@ abstract public class Veiculo {
     protected boolean motorLigado;
     protected double velocidadeAtual;
     protected double combustivel;
+    protected double limiteLitros;
 
-    public Veiculo(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual, double combustivel) {
+    public Veiculo(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual, double combustivel, 
+            double limiteLitros) {
         setMarca(marca);
         setModelo(modelo);
         setAno(ano);
         this.motorLigado = false; // Motor desligado por padrão
         this.velocidadeAtual = 0.0; // Velocidade inicial 0
-        setCombustivel(combustivel); 
+        setCombustivel(combustivel);
+        setLimiteLitros(limiteLitros);
     }
 
     abstract protected void exibirInfo();
@@ -71,7 +74,7 @@ abstract public class Veiculo {
         this.velocidadeAtual = velocidadeAtual;
     }
 
-    public double statusCombustivel() {
+    public double getCombustivel() {
         return this.combustivel;
     }
 
@@ -82,6 +85,18 @@ abstract public class Veiculo {
         this.combustivel = combustivel;
     }
 
+    public double getLimiteLitros() {
+        return this.limiteLitros;
+    }
+
+    public void setLimiteLitros(double limiteLitros) {
+        if (limiteLitros < 0) {
+            throw new IllegalArgumentException("Limite de litros não pode ser negativo!");
+        }
+        this.limiteLitros = limiteLitros;
+    }
+
+    // Métoddos para definir o funcionamento do veículo
     public void ligarMotor() {
         if (this.combustivel <= 0) {
             throw new IllegalStateException("Não é possível ligar o motor sem combustível!");
@@ -108,7 +123,7 @@ abstract public class Veiculo {
         }
         this.velocidadeAtual += 10;
         this.combustivel --;
-        System.out.println("Acelerando... Velocidade atual: " + getVelocidadeAtual() + " km/h. Combustível restante: " + statusCombustivel() + " litros.");
+        System.out.println("Acelerando... Velocidade atual: " + getVelocidadeAtual() + " km/h. Combustível restante: " + getCombustivel() + " litros.");
     }
 
     public void frear() {
@@ -127,6 +142,15 @@ abstract public class Veiculo {
         if (this.motorLigado) {
             throw new IllegalStateException("O motor deve estar desligado para abastecer!");
         }
+
+        if (combustivel <= 0) {
+            throw new IllegalArgumentException("Quantidade de combustível deve ser positiva!");
+        }
+
+        if (this.combustivel + combustivel > this.limiteLitros) {
+            throw new IllegalArgumentException("Abastecimento excede o limite do tanque (" + this.limiteLitros + " litros)!");
+        }
+
         this.combustivel += combustivel;
         System.out.println(combustivel + " litros foram abastecendo no veículo!");
     }
@@ -139,6 +163,7 @@ abstract public class Veiculo {
         if (this.velocidadeAtual > 0) {
             throw new IllegalStateException("Reduza a velocidade a zero antes de sair do veículo!");
         }
+
         System.out.println("Saindo do veículo...");
     }
 }
