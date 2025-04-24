@@ -71,7 +71,7 @@ abstract public class Veiculo {
         if (velocidadeAtual < 0) {
             throw new IllegalArgumentException("Velocidade atual não pode ser negativa!");
         }
-        this.velocidadeAtual = velocidadeAtual;
+        this.velocidadeAtual += velocidadeAtual;
     }
 
     public double getCombustivel() {
