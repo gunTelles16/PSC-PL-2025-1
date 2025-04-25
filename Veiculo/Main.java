@@ -6,7 +6,7 @@ public class Main {
         Locadora locadora = new Locadora();
 
         try{
-            Veiculo veiculo = locadora.adicionarVeiculo(); //
+            Veiculo veiculo = locadora.adicionarVeiculo();
             System.out.println("Veículo cadastrado com sucesso!");
 
             String opcao = getString("Deseja dirigir o veículo?");

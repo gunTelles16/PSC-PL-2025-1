@@ -12,28 +12,33 @@ public class Locadora {
     public Veiculo adicionarVeiculo() {
         System.out.println("=== Cadastro de Veículos ===");
         String placa = getString("Placa:");
-        String tipo = getString("Tipo (Carro, Moto):");
+        String tipo = getString("Tipo (Carro, Moto, Avião, Barco, Trem):");
 
         Veiculo veiculo = null;
 
-        if (!tipo.equalsIgnoreCase("Carro") && !tipo.equalsIgnoreCase("Moto")) {
-            throw new IllegalArgumentException("Tipo inválido! Digite 'Carro' ou 'Moto'.");
+        if (!tipo.equalsIgnoreCase("Carro") && !tipo.equalsIgnoreCase("Moto") && !tipo.equalsIgnoreCase("Avião")
+                && !tipo.equalsIgnoreCase("Barco") && !tipo.equalsIgnoreCase("Trem")) {
+            throw new IllegalArgumentException("Tipo inválido! Digite 'Carro'. 'Moto', 'Avião', 'Barco' ou 'Trem'.");
         }
 
-        if (tipo.equalsIgnoreCase("Carro")) {
-            String subtipo = getString("Tipo de carro (Sedan ou SUV):");
-
-            if (!subtipo.equalsIgnoreCase("Sedan") && !subtipo.equalsIgnoreCase("SUV")) {
-                throw new IllegalArgumentException("Tipo de carro inválido! Digite 'Sedan' ou 'SUV'.");
+        switch (tipo) {
+            case "Carro" ->  {
+                String subtipo = getString("Tipo de carro (Sedan ou SUV):");
+                
+                if (!subtipo.equalsIgnoreCase("Sedan") && !subtipo.equalsIgnoreCase("SUV")) {
+                    throw new IllegalArgumentException("Tipo de carro inválido! Digite 'Sedan' ou 'SUV'.");
+                }
+                
+                if (subtipo.equalsIgnoreCase("Sedan")) {
+                    veiculo = criarSedan();
+                } else if (subtipo.equalsIgnoreCase(subtipo)) {
+                    veiculo = criarSUV();
+                }
             }
-
-            if (subtipo.equalsIgnoreCase("Sedan")) {
-                veiculo = criarSedan();
-            } else if (subtipo.equalsIgnoreCase(subtipo)) {
-                veiculo = criarSUV();
-            }
-        } else if (tipo.equalsIgnoreCase("Moto")) {
-            veiculo = criarMoto();
+            case "Moto" -> veiculo = criarMoto();
+            case "Avião" -> veiculo = criarAviao();
+            case "Barco" -> veiculo = criarBarco();
+            case "Trem" -> veiculo = criarTrem();
         }
 
         veiculos.put(placa, veiculo);
@@ -84,6 +89,41 @@ public class Locadora {
         
         return new SUV(marca, modelo, ano, false, 0.0, combustivel, limiteLitros,
             numeroPortas, arCondicionado, tracao4x4, pilotoAutomatico);
+    }
+
+    public Aviao criarAviao() {
+        System.out.println("=== Cadastro de Avião ===");
+        String marca = getString("Marca:");
+        String modelo = getString("Modelo:");
+        int ano = (int) getNumero("Ano de fabricação:");
+        double combustivel = (double) getNumero("Quantidade de combustível:");
+        double limiteLitros = (double) getNumero("Limite do tanque de combustível:");
+
+        return new Aviao(marca, modelo, ano, false, 0.0, combustivel, limiteLitros, 0, true);
+    }
+
+    public Barco criarBarco() {
+        System.out.println("=== Cadastro de Barco ===");
+        String marca = getString("Marca:");
+        String modelo = getString("Modelo:");
+        int ano = (int) getNumero("Ano de fabricação:");
+        double combustivel = (double) getNumero("Quantidade de combustível:");
+        double limiteLitros = (double) getNumero("Limite do tanque de combustível:");
+        String tipoCasco = getString("Tipo de casco:");
+
+        return new Barco(marca, modelo, ano, false, 0.0, combustivel, limiteLitros, tipoCasco);
+    }
+
+    public Trem criarTrem() {
+        System.out.println("=== Cadastro de Trem ===");
+        String marca = getString("Marca:");
+        String modelo = getString("Modelo");
+        int ano = (int) getNumero("Ano de fabricação:");
+        double combustivel = (double) getNumero("Quantidade de combustível:");
+        double limiteLitros = (double) getNumero("Limite do tanque de combustível:");
+        int numeroVagoes = (int) getNumero("Número de vagões:");
+
+        return new Trem(marca, modelo, ano, false, 0.0, combustivel, limiteLitros, numeroVagoes);
     }
 
     public HashMap<String, Veiculo> getVeiculos() {
