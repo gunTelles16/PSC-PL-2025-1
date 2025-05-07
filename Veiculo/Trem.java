@@ -29,11 +29,24 @@ public class Trem extends Veiculo {
         this.numeroVagoes = numeroVagoes;
     }
 
-    public void acoplarVagoes() {
-
+    public void acoplarVagao() {
+        this.numeroVagoes++;
+        System.out.println("Vagão acoplado. Total de vagões: " + this.numeroVagoes);
     }
 
     public void desacoplarVagao() {
+        if (this.numeroVagoes > 0) {
+            this.numeroVagoes--;
+            System.out.println("Vagão desacoplado. Total de vagões: " + this.numeroVagoes);
+        } else {
+            System.out.println("Não há vagões para desacoplar!");
+        }
+    }
 
+    @Override
+    public void acelerar() {
+        super.acelerar();
+        super.setVelocidadeAtual(30);
+        System.out.println("O Trem está em movimento com " + getNumeroVagoes() + " vagões!");
     }
 }

@@ -1,9 +1,11 @@
 public class Barco extends Veiculo {
     private String tipoCasco;
+    private boolean ancoraSolta;
 
     public Barco(String marca, String modelo, int ano, boolean motorLigado, double velocidadeAtual, double combustivel, double limiteLitros, String tipoCasco) {
         super(marca, modelo, ano, false, 0.0, combustivel, limiteLitros);
         setTipoCasco(tipoCasco);
+        this.ancoraSolta = false; // Âncora presa por padrão
     }
 
     public void exibirInfo() {
@@ -28,11 +30,33 @@ public class Barco extends Veiculo {
         this.tipoCasco = tipoCasco;
     }
 
-    public void ancorar() {
+    public boolean isAncoraSolta() {
+        return ancoraSolta;
+    }
 
+    public void setAncoraSolta(boolean ancoraSolta) {
+        this.ancoraSolta = ancoraSolta;
+    }
+
+    public void ancorar() {
+        if (!this.motorLigado) {
+            throw new IllegalStateException("Não é possível ancorar enquanto o motor estiver ligado!");
+        }
+        this.ancoraSolta = true;
+        System.out.println("O barco foi ancorado!");
     }
 
     public void soltarAncora() {
+        if (!this.motorLigado) {
+            throw new IllegalStateException("Não é possível soltar a âncora enquanto o motor estiver ligado!");
+        }
+        this.ancoraSolta = false;
+        System.out.println("O barco está livre para navegar!");
+    }
 
+    @Override
+    public void acelerar() {
+        super.acelerar();
+        super.setVelocidadeAtual(20);
     }
 }

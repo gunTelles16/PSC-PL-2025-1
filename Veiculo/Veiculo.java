@@ -25,7 +25,7 @@ abstract public class Veiculo {
     }
 
     public void setMarca(String marca) {
-        if (marca == null || marca.trim().isEmpty()) {
+        if (this.marca == null || this.marca.trim().isEmpty()) {
             throw new IllegalArgumentException("Marca não pode ser vazio!");
         }
         this.marca = marca;
@@ -36,7 +36,7 @@ abstract public class Veiculo {
     }
 
     public void setModelo(String modelo) {
-        if (modelo == null || modelo.trim().isEmpty()) {
+        if (this.modelo == null || this.modelo.trim().isEmpty()) {
             throw new IllegalArgumentException("Modelo não pode ser vazio!");
         }
         this.modelo = modelo;
@@ -49,7 +49,7 @@ abstract public class Veiculo {
     public void setAno(int ano) {
         int anoAtual = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
 
-        if (ano < 1980 || ano > anoAtual) {
+        if (this.ano < 1980 || this.ano > anoAtual) {
             throw new IllegalArgumentException("O ano de fabricação deve ser entre 1980 e " + anoAtual + "!");
         }
         this.ano = ano;
@@ -68,7 +68,7 @@ abstract public class Veiculo {
     }
 
     public void setVelocidadeAtual(double velocidadeAtual) {
-        if (velocidadeAtual < 0) {
+        if (this.velocidadeAtual < 0) {
             throw new IllegalArgumentException("Velocidade atual não pode ser negativa!");
         }
         this.velocidadeAtual += velocidadeAtual;
@@ -79,7 +79,7 @@ abstract public class Veiculo {
     }
 
     public void setCombustivel(double combustivel) {
-        if (combustivel < 0) {
+        if (this.combustivel < 0) {
             throw new IllegalArgumentException("Quantidade de combustível não pode ser negativa!");
         }
         this.combustivel = combustivel;
@@ -90,7 +90,7 @@ abstract public class Veiculo {
     }
 
     public void setLimiteLitros(double limiteLitros) {
-        if (limiteLitros < 0) {
+        if (this.limiteLitros < 0) {
             throw new IllegalArgumentException("Limite de litros não pode ser negativo!");
         }
         this.limiteLitros = limiteLitros;
